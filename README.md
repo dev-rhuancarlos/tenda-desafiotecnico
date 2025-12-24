@@ -24,7 +24,7 @@ API REST para gerenciamento de cupons de desconto desenvolvida com Spring Boot.
 ### 1. Localmente (Maven)
 ```bash
 # Clone o repositório
-git clone https://github.com/seu-usuario/desafio-tecnico.git
+git clone https://github.com/dev.rhuancarlos/desafio-tecnico.git
 
 # Entre no diretório
 cd desafio-tecnico
