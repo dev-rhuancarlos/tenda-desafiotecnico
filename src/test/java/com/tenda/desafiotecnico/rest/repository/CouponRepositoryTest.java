@@ -11,6 +11,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.ActiveProfiles;
 
 import com.tenda.desafiotecnico.rest.entity.Coupon;
+import com.tenda.desafiotecnico.rest.enums.Status;
 
 @DataJpaTest
 @ActiveProfiles("test")
@@ -29,6 +30,7 @@ class CouponRepositoryTest {
                 .expirationDate(LocalDate.now().plusDays(30))
                 .published(true)
                 .deleted(false)
+                .status(Status.ACTIVE)
                 .build();
 
         // Act
@@ -45,27 +47,29 @@ class CouponRepositoryTest {
     void existsByCodeAndDeletedFalse_WhenCodeExists_ShouldReturnTrue() {
         // Arrange
         Coupon coupon = Coupon.builder()
-                .code("EXISTS1")
-                .description("Test")
+                .code("EXISS1")
+                .description("Testestes")
                 .discountValue(new BigDecimal("1.00"))
                 .expirationDate(LocalDate.now().plusDays(1))
                 .deleted(false)
+                .status(Status.ACTIVE)
                 .build();
         couponRepository.save(coupon);
 
         // Act & Assert
-        assertThat(couponRepository.existsByCodeAndDeletedFalse("EXISTS1")).isTrue();
+        assertThat(couponRepository.existsByCodeAndDeletedFalse("EXISS1")).isTrue();
     }
 
     @Test
     void findByIdAndDeletedFalse_WhenCouponDeleted_ShouldReturnEmpty() {
         // Arrange
         Coupon coupon = Coupon.builder()
-                .code("DELETED")
+                .code("DELTED")
                 .description("Deleted coupon")
                 .discountValue(new BigDecimal("2.00"))
                 .expirationDate(LocalDate.now().plusDays(1))
                 .deleted(true)
+                .status(Status.ACTIVE)
                 .build();
         Coupon saved = couponRepository.save(coupon);
 
